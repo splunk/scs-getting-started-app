@@ -1,0 +1,12 @@
+.DS_Store
+.idea/
+.vscode/
+build/
+test-reports/
+coverage-report/
+node_modules
+npm-debug.log
+yarn-error.log
+*.map
+*.iml
+/out

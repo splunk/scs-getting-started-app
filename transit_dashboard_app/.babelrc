@@ -1,0 +1,10 @@
+{
+  "presets": ["@splunk/babel-preset"],
+  "plugins": [
+    ["transform-runtime", {
+      "polyfill": true,
+      "regenerator": true
+    }],
+    ["babel-plugin-styled-components", {}]
+  ]
+}

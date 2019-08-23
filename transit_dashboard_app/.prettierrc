@@ -1,0 +1,14 @@
+{
+    "printWidth": 100,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "overrides": [
+        {
+            "files": "package.json",
+            "options": {
+                "printWidth": 2
+            }
+        }
+    ]
+}

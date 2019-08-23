@@ -1,0 +1,7 @@
+{
+    "auth": {
+        "clientId": "YOUR CLIENT ID"
+    },
+    "tenantId": "YOUR TENANT ID",
+    "cloudApiUrl": "https://api.scp.splunk.com"
+}

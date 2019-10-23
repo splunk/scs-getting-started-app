@@ -1,57 +1,45 @@
 {
-    "name": "simple_dashboard",
-    "version": "0.0.1",
-    "private": true,
-    "author": "Splunk",
-    "scripts": {
-        "build": "cross-env NODE_ENV=production webpack",
-        "start": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
-        "eslint": "eslint src --ext \".js,.jsx\"",
-        "eslint:fix": "eslint src --ext \".js, .jsx\" --fix"
-    },
-    "devDependencies": {
-        "@splunk/babel-preset": "^1.2.0",
-        "@splunk/eslint-config": "^1.2.0",
-        "@splunk/webpack-configs": "^2.0.0",
-        "babel-cli": "^6.23.0",
-        "babel-core": "^6.26.0",
-        "babel-eslint": "^7.2.0",
-        "babel-loader": "^7.1.1",
-        "babel-plugin-styled-components": "^1.5.1",
-        "babel-plugin-transform-runtime": "^6.23.0",
-        "babel-runtime": "^6.26.0",
-        "cross-env": "^5.2.0",
-        "eslint": "^4.19.0",
-        "eslint-config-airbnb": "^15.1.0",
-        "eslint-config-prettier": "^2.9.0",
-        "eslint-import-resolver-webpack": "^0.8.3",
-        "eslint-plugin-import": "^2.7.0",
-        "eslint-plugin-jsx-a11y": "^5.1.1",
-        "eslint-plugin-prettier": "^2.6.0",
-        "eslint-plugin-react": "^7",
-        "html-webpack-plugin": "^3.2.0",
-        "prettier": "^1.14.2",
-        "source-map-loader": "^0.2.3",
-        "uglifyjs-webpack-plugin": "^2.1.2",
-        "webpack": "^4.19.1",
-        "webpack-cli": "^3.1.0",
-        "webpack-dev-server": "^3.1.8",
-        "webpack-merge": "^4.1.0"
-    },
-    "dependencies": {
-        "@splunk/cloud-auth": "^1.0.5",
-        "@splunk/cloud-sdk": "^0.8.0",
-        "@splunk/dashboard-core": "^1.6.0",
-        "@splunk/dashboard-presets": "^1.6.0",
-        "@splunk/react-icons": "^2.0.0",
-        "@splunk/react-ui": "^2.0.0",
-        "@splunk/react-visualizations": "^1.6.0",
-        "@splunk/universal-nav": "0.1.42",
-        "babel-polyfill": "^6.26.0",
-        "react": "^16.4.2",
-        "react-dom": "^16.4.2",
-        "react-router": "^4.2.0",
-        "react-router-dom": "^4.2.0",
-        "styled-components": "^3.4.2"
-    }
+  "name": "transit_dashboard_app",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Splunk",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "third-party-licenses": "node ci/generate_3rdparty.js"
+  },
+  "dependencies": {
+    "@splunk/dashboard-context": "^8.0.4",
+    "@splunk/dashboard-core": "^8.0.4",
+    "@splunk/dashboard-presets": "^8.0.4",
+    "@splunk/react-ui": "^2.13.1",
+    "@splunkdev/cloud-auth": "^1.0.0",
+    "babel-polyfill": "^6.26.0",
+    "core-js": "^2.6.9",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "markdownlint": "^0.16.0",
+    "npm-license-crawler": "^0.2.1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

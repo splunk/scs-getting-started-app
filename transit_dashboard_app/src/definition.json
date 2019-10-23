@@ -1,0 +1,159 @@
+{
+	"dataSources": {
+		"status_search": {
+			"type": "ds.search",
+			"options": {
+				"query": "| from index:main where source=\"arrivals_and_departures_json\" select 'data.entry.arrivalsAndDepartures{}.tripStatus.status' as tripStatus | stats count(tripStatus) by tripStatus",
+				"queryParameters": {
+					"latest": "now",
+					"earliest": "0"
+				}
+			}
+		},
+		"num_routes_search": {
+			"type": "ds.search",
+			"options": {
+				"query": "| from index:main where source=\"arrivals_and_departures_json\" select 'data.references.routes{}.id' as routeIds | stats dc(routeIds) as numRoutes",
+				"queryParameters": {
+					"latest": "now",
+					"earliest": "0"
+				}
+			}
+		},
+		"num_stops_search": {
+			"type": "ds.search",
+			"options": {
+				"query": "| from index:main where source=\"arrivals_and_departures_json\" select 'data.entry.stopId' as stopId | stats dc(stopId) as numStops",
+				"queryParameters": {
+					"latest": "now",
+					"earliest": "0"
+				}
+			}
+		},
+		"next_arrival_search": {
+			"type": "ds.search",
+			"options": {
+				"query": "| from index:main where source=\"arrivals_and_departures_json\" | eval distanceFromStop=\"data.entry.arrivalsAndDepartures{}.distanceFromStop\"| eval routeLongName=\"data.entry.arrivalsAndDepartures{}.routeLongName\"| stats max(distanceFromStop) by routeLongName | rename \"max(distanceFromStop)\" as \"Distance\", routeLongName as \"Route Name\" | sort +Distance",
+				"queryParameters": {
+					"latest": "now",
+					"earliest": "0"
+				}
+			}
+		},
+		"num_agencies_search": {
+			"type": "ds.search",
+			"options": {
+				"query": "| from index:main where source=\"agencies_with_coverage_json\" select id | stats dc(id) as numAgencies",
+				"queryParameters": {
+					"latest": "now",
+					"earliest": "0"
+				}
+			}
+		},
+		"trip_distance_search": {
+			"type": "ds.search",
+			"options": {
+				"query": "| from index:main where source=\"arrivals_and_departures_json\" select 'data.entry.arrivalsAndDepartures{}.distanceFromStop' as distanceFromStop, 'data.entry.arrivalsAndDepartures{}.routeLongName' as routeLongName | stats max(distanceFromStop) by routeLongName | rename 'max(distanceFromStop)' as 'Distance', routeLongName as 'Route Name' | sort -Distance | head 5",
+				"queryParameters": {
+					"latest": "now",
+					"earliest": "0"
+				}
+			}
+		}
+	},
+	"inputs": {},
+	"layout": {
+		"type": "absolute",
+		"structure": [
+			{
+				"item": "num_agencies",
+				"position": {
+					"h": 300,
+					"w": 400,
+					"x": 0,
+					"y": 0
+				}
+			},
+			{
+				"item": "num_routes",
+				"position": {
+					"h": 300,
+					"w": 400,
+					"x": 400,
+					"y": 0
+				}
+			},
+			{
+				"item": "num_stops",
+				"position": {
+					"h": 300,
+					"w": 400,
+					"x": 800,
+					"y": 0
+				}
+			},
+			{
+				"item": "trip_distance_board",
+				"position": {
+					"h": 500,
+					"w": 600,
+					"x": 0,
+					"y": 300
+				}
+			},
+			{
+				"item": "status_pie",
+				"position": {
+					"h": 500,
+					"w": 600,
+					"x": 600,
+					"y": 300
+				}
+			}
+		]
+	},
+	"title": "",
+	"description": "",
+	"visualizations": {
+		"num_stops": {
+			"type": "viz.singlevalue",
+			"title": "Number of Transit Stops",
+			"options": {},
+			"dataSources": {
+				"primary": "num_stops_search"
+			}
+		},
+		"num_routes": {
+			"type": "viz.singlevalue",
+			"title": "Number of Transit Routes",
+			"options": {},
+			"dataSources": {
+				"primary": "num_routes_search"
+			}
+		},
+		"status_pie": {
+			"type": "viz.pie",
+			"title": "Route Status",
+			"options": {},
+			"dataSources": {
+				"primary": "status_search"
+			}
+		},
+		"num_agencies": {
+			"type": "viz.singlevalue",
+			"title": "Number of Transit Agencies",
+			"options": {},
+			"dataSources": {
+				"primary": "num_agencies_search"
+			}
+		},
+		"trip_distance_board": {
+			"type": "viz.bar",
+			"title": "Routes Behind Schedule",
+			"options": {},
+			"dataSources": {
+				"primary": "trip_distance_search"
+			}
+		}
+	}
+}

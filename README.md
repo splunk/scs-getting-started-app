@@ -26,7 +26,6 @@ Depending on what you choose to do during the workshop, you'll need to ensure yo
 - [Node.js](https://nodejs.org) is a JavaScript runtime environment that is required for a number of example applications accessed from the Splunk Developer Portal. Node.js version 8.3.0 or later is required for this app. 
 - [npm](https://www.npmjs.com/) is package manager that makes it easy for programmers to publish and share source code of Node.js libraries.
   - The npm client is installed with Node.js. 
-  - Log in to npm (run `npm login`) before running `npm` or `npx` commands.
 - [Yarn](https://yarnpkg.com/en/docs/install) is a package manager that enables additional workflows for JavaScript applications. Yarn is used to install packages and run commands in the Transit Dashboard App. Yarn version 1.3.2 or later is required for this app.
 
 ## Key concepts and terminology of Splunk Cloud Services

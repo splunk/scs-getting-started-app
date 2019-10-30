@@ -1,10 +1,8 @@
-# Welcome to the .conf19 DEV2517 workshop
+# Transit Dashboard App
 
-## Overview
+This repository contains the code for the Transit Dashboard App, which uses Splunk Cloud Services to display a dashboard with transit route status by stop using data from Seattle Transit agencies. 
 
-This repository features resources and learning opportunities for participants attending the DEV2517 "Unlocking all the features of the Splunk Developer Program - Cloud Native App Development" workshop at .conf19. It contains the code for the Transit Dashboard App, which uses Splunk Cloud Services to display a dashboard with transit route status by stop using data from Seattle Transit agencies. 
-
-This readme will guide you through the workshop contents, and contains the following sections: 
+This readme contains the following sections: 
 -  Set up your environment
 -  Key concepts and terminology of Splunk Cloud Services
 -  Log in to Splunk Cloud Services and use the APIs
@@ -13,19 +11,16 @@ This readme will guide you through the workshop contents, and contains the follo
 -  Define the app and create a subscription
 -  Build and run the Transit Dashboard App
 
-# Transit Dashboard App
-
 ## Set up your environment
 
-If you haven't done so already, [sign up for Splunk Investigate](http://splunk.com/investigate) with a new Splunk account (or [sign in to Splunk Investigate](https://si.scp.splunk.com/) with your existing Splunk account), accept the Terms Of Service, and choose a name for your Splunk Cloud Services tenant.
+If you haven't done so already, sign up for [Splunk Investigate](http://splunk.com/investigate) with a new Splunk account, or sign in with your existing Splunk account, accept the Terms Of Service, and choose a name for your Splunk Cloud Services tenant.
 
-Depending on what you choose to do during the workshop, you'll need to ensure your local development environment is set up to successfully submit API requests, and to access and run code examples and applications. Here are the tools you'll use:
+To ensure your local development environment is set up to successfully submit API requests, and to access and run code examples and applications, install the following tools:
 
 - [Splunk Cloud Services CLI](https://dev.splunk.com/scs/docs/overview/tools/tools_scloud), or `scloud`, is a command-line tool that makes it easy to submit API requests against Splunk Cloud Services. Download and unpack the `scloud` binary from [GitHub](https://github.com/splunk/splunk-cloud-sdk-go/releases).
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) is a source-code management tool that allows you to run commands to access projects and keep track of changes to application files.
 - [Node.js](https://nodejs.org) is a JavaScript runtime environment that is required for a number of example applications accessed from the Splunk Developer Portal. Node.js version 8.3.0 or later is required for this app. 
-- [npm](https://www.npmjs.com/) is package manager that makes it easy for programmers to publish and share source code of Node.js libraries.
-  - The npm client is installed with Node.js. 
+- [npm](https://www.npmjs.com/) is package manager that makes it easy for programmers to publish and share source code of Node.js libraries. The npm client is installed with Node.js. 
 - [Yarn](https://yarnpkg.com/en/docs/install) is a package manager that enables additional workflows for JavaScript applications. Yarn is used to install packages and run commands in the Transit Dashboard App. Yarn version 1.3.2 or later is required for this app.
 
 ## Key concepts and terminology of Splunk Cloud Services
@@ -267,7 +262,7 @@ To build and run the app:
 
 For more information about Splunk Cloud Services, see the [Splunk Developer Portal](https://dev.splunk.com/scs/).
 
-For extensive SCS dashboard examples see the [SCS Dashboard Examples repo](https://github.com/splunk/conf2019-dashboard-scs).
+For more dashboard examples, see the [SCS Dashboard Examples repo](https://github.com/splunk/conf2019-dashboard-scs).
 
 For more about the tools that were used to build this app, see: 
 - [Splunk Cloud Services SDK for JavaScript](https://github.com/splunk/splunk-cloud-sdk-js), which uses JavaScript to communicate with the Splunk Cloud Services REST APIs.
@@ -275,22 +270,3 @@ For more about the tools that were used to build this app, see:
 - [Dashboard Framework](https://dev.splunk.com/scs/docs/dashviz), which contains a framework for working with dashboards and visualizations.
 - [Create React App](https://github.com/facebook/create-react-app), for bootstrapping this app.
 
-## Challenge yourself!
-
-Have time to do more after getting the Transit Dashboard App up and running? Try out any of these *extra challenges*:
-- [ ] Update the "passthrough" pipeline to perform a simple `eval` on incoming data.
-- [ ] Ingest your own dataset (something **not** found on the Splunk Developer Portal or `https://github.com/splunk`) and write it to an index other than "main" and search the data using SPL2. Some data sources to try:
-  - [Amazon customer review data](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-  - [Data.gov](https://www.data.gov/)
-  - [Open Data on AWS](https://registry.opendata.aws/)
-- [ ] Visualize insights from your own dataset in a dashboard.
-- [ ] Deploy and run an app you've set up locally to somewhere in the cloud (e.g. Heroku). 
-  - *Hint: you'll need to work with the App Registry service after you've deployed the app and have a new URL its served from.*
-- [ ] Find all the datasets in your tenant using the Catalog service, find all the groups you're a member of using the Identity service, and find your permissions in your tenant using the Identity service.
-- [ ] Invite someone else to your tenant, and walk through the invite flow to enable collaboration!
-
-## Contact us anytime!
-
-Remember, you're now a member of the Splunk Cloud Services community, so keep exploring and experimenting with the beta after the workshop is over! 
-- <devinfo@splunk.com>
-- [#sdc](https://splunkdevplatform.slack.com/messages/CD44RNV7G) channel on Slack

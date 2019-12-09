@@ -19,7 +19,7 @@ Repository: [https://github.com/babel/babel/tree/master/packages/babel-polyfill]
 
 Name: core-js
 
-Version: 2.6.9
+Version: 2.6.11
 
 License: [MIT](https://github.com/zloirock/core-js/raw/master/LICENSE)
 
@@ -29,7 +29,7 @@ Repository: [https://github.com/zloirock/core-js](https://github.com/zloirock/co
 
 Name: react-dom
 
-Version: 16.9.0
+Version: 16.12.0
 
 License: [MIT](https://github.com/facebook/react/raw/master/LICENSE)
 
@@ -39,7 +39,7 @@ Repository: [https://github.com/facebook/react](https://github.com/facebook/reac
 
 Name: react-scripts
 
-Version: 3.1.1
+Version: 3.3.0
 
 License: [MIT](https://github.com/facebook/create-react-app/raw/master/LICENSE)
 
@@ -49,7 +49,7 @@ Repository: [https://github.com/facebook/create-react-app](https://github.com/fa
 
 Name: react
 
-Version: 16.9.0
+Version: 16.12.0
 
 License: [MIT](https://github.com/facebook/react/raw/master/LICENSE)
 
@@ -59,7 +59,7 @@ Repository: [https://github.com/facebook/react](https://github.com/facebook/reac
 
 Name: styled-components
 
-Version: 4.3.2
+Version: 4.4.1
 
 License: [MIT](https://github.com/styled-components/styled-components)
 

@@ -13,14 +13,16 @@ This readme contains the following sections:
 
 ## Set up your environment
 
-If you haven't done so already, sign up for [Splunk Investigate](http://splunk.com/investigate) with a new Splunk account, or sign in with your existing Splunk account, accept the Terms Of Service, and choose a name for your Splunk Cloud Services tenant.
+If you haven't done so already, sign up for [Splunk Investigate](http://splunk.com/investigate) with a new or existing Splunk account, accept the Terms Of Service, and choose a name for your Splunk Cloud Services tenant.
 
 To ensure your local development environment is set up to successfully submit API requests, and to access and run code examples and applications, install the following tools:
 
 - [Splunk Cloud Services CLI](https://dev.splunk.com/scs/docs/overview/tools/tools_scloud), or `scloud`, is a command-line tool that makes it easy to submit API requests against Splunk Cloud Services. Download and unpack the `scloud` binary from [GitHub](https://github.com/splunk/splunk-cloud-sdk-go/releases).
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) is a source-code management tool that allows you to run commands to access projects and keep track of changes to application files.
 - [Node.js](https://nodejs.org) is a JavaScript runtime environment that is required for a number of example applications accessed from the Splunk Developer Portal. Node.js version 8.3.0 or later is required for this app. 
-- [npm](https://www.npmjs.com/) is package manager that makes it easy for programmers to publish and share source code of Node.js libraries. The npm client is installed with Node.js. 
+- [npm](https://www.npmjs.com/) is package manager that makes it easy for programmers to publish and share source code of Node.js libraries.
+  - The npm client is installed with Node.js. 
+  - Log in to npm (run `npm login`) before running `npm` or `npx` commands.
 - [Yarn](https://yarnpkg.com/en/docs/install) is a package manager that enables additional workflows for JavaScript applications. Yarn is used to install packages and run commands in the Transit Dashboard App. Yarn version 1.3.2 or later is required for this app.
 
 ## Key concepts and terminology of Splunk Cloud Services
@@ -30,16 +32,16 @@ Splunk Cloud Services is a collection of services exposed via REST APIs to enabl
 <img alt="SCS Identities Screenshot" src="./img/identities.png" width="400">
 
 The most fundamental concepts to understand for this sample app are the identities and their relationships:
-- **Principals** represent an actor that makes API requests against Splunk Cloud Services.
-  - Users and service accounts are *kinds* of principals.
-- **Tenants** represent a way to contain and isolate the resources provided by Splunk Cloud Services.
+- Principals represent an actor that makes API requests against Splunk Cloud Services.
+  - Users, apps, and service accounts are kinds of principals.
+- Tenants represent a way to contain and isolate the resources provided by Splunk Cloud Services.
   - Splunk Cloud Services is multi-tenant. There is no separate deployment per customer as with Splunk Enterprise.
   - API requests are all made in the context of a specific tenant.
-- Principals are allowed to make API requests against a tenant only if there exists a **membership**.
+- Principals are allowed to make API requests against a tenant only a membership exists.
   - The membership includes specific permissions granted to the principal within the tenant.
-- Apps are allowed to operate on behalf of users if there exists a **subscription** to the tenant.
-  - The subscription includes specific permissions granted to the app principal, within the tenant.
-- The subscription and membership provides **consent** between the app and principal.
+- Apps are allowed to operate on behalf of users with a subscription to the tenant.
+  - The subscription includes specific permissions that are granted to the app principal within the tenant.
+- The subscription and membership provide consent between the app and principal.
 
 ### Clone the repo
 
@@ -102,7 +104,7 @@ All incoming data moves through the Splunk Data Stream Processor (DSP). Data fro
 
 Indexes are defined as kind of dataset managed by the Catalog service, along with other datasets such as search job or kvstore lookup. Datasets are knowledge objects that contain data that can be read or written to.
 
-After events are indexed, they can be searched through an updated and refined Splunk Search Processing Language (SPL2). SPL2 uses a natural grammar that more closely resembles SQL (checkout this [quick reference guide](https://github.com/splunk/conf19-sdc-workshop/blob/master/resources/SPL2%20Command%20Quick%20Reference.pdf) for the new commands). All the same `stats` and `eval` functions are still there, to allow you to create visualizations.
+After events are indexed, they can be searched through an updated and refined Splunk Search Processing Language (SPL2). SPL2 uses a natural grammar that more closely resembles SQL. The same `stats` and `eval` functions are still there, to allow you to create visualizations. See the [SPL2 Command Quick Reference](https://github.com/splunk/conf19-sdc-workshop/blob/master/resources/SPL2%20Command%20Quick%20Reference.pdf) for details. 
 
 <img alt="Ingest and Search Screenshot" src="./img/ingest-search.png" width="600">
 

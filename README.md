@@ -50,7 +50,7 @@ The most fundamental concepts to understand for this sample app are the identiti
 2. At the command line, navigate to the folder and run the following command: 
 
     ``` 
-    $ git clone https://github.com/splunk/conf19-sdc-workshop
+    $ git clone https://github.com/splunk/scs-getting-started-app
     ```
 
 ## Log in to Splunk Cloud Services and use the APIs
@@ -104,7 +104,7 @@ All incoming data moves through the Splunk Data Stream Processor (DSP). Data fro
 
 Indexes are defined as kind of dataset managed by the Catalog service, along with other datasets such as search job or kvstore lookup. Datasets are knowledge objects that contain data that can be read or written to.
 
-After events are indexed, they can be searched through an updated and refined Splunk Search Processing Language (SPL2). SPL2 uses a natural grammar that more closely resembles SQL. The same `stats` and `eval` functions are still there, to allow you to create visualizations. See the [SPL2 Command Quick Reference](https://github.com/splunk/conf19-sdc-workshop/blob/master/resources/SPL2%20Command%20Quick%20Reference.pdf) for details. 
+After events are indexed, they can be searched through an updated and refined Splunk Search Processing Language (SPL2). SPL2 uses a natural grammar that more closely resembles SQL. The same `stats` and `eval` functions are still there, to allow you to create visualizations. See the [SPL2 Command Quick Reference](https://github.com/splunk/scs-getting-started-app/blob/master/resources/SPL2%20Command%20Quick%20Reference.pdf) for details. 
 
 <img alt="Ingest and Search Screenshot" src="./img/ingest-search.png" width="600">
 

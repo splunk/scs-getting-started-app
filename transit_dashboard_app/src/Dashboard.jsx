@@ -21,6 +21,11 @@ import authClient from './auth';
 import { tenantId, cloudApiUrl } from './config/config.json';
 import definition from './definition.json';
 
+/**
+  * Dashboard component based on the @splunk/dashboard-core framework for displaying our transit data.
+  * The dashboard definition.json file contains the actual dashboard searches and layout information and 
+  * can be viewed and edited using Splunk Investigate.
+  */
 export default () => (
     <div>
         <DashboardCore

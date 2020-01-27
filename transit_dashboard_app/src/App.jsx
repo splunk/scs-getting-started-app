@@ -20,12 +20,17 @@ import { tenantId, auth } from './config/config.json';
 import Dashboard from './Dashboard';
 import { Center, ErrorCircle, ErrorMsg, GlobalStyle, List, ListItem } from './styles';
 
+/**
+  * This is the main React component which has states corresponding to:
+  *   configured: whether the app has been properly configured with a client id and tenant
+  *   loggedIn:   whether the user is currently logged into Splunk Cloud Services
+  *   error:      any errors that may have resulted from login or other services
+  *  
+  */
 class App extends Component {
     state = {
         configured: tenantId !== 'YOUR TENANT ID' && auth.clientId !== 'YOUR CLIENT ID',
         loggedIn: false,
-        pipelineActivated: false,
-        dataIngested: false,
         error: null,
     };
 
@@ -53,6 +58,8 @@ class App extends Component {
 
     render() {
         const { configured, loggedIn, error } = this.state;
+        // For the error case give some common resolution steps related to app setup if login related or
+        // display the error itself otherwise
         if (error) {
             if (!loggedIn) {
                 // Clear any tokens from storage as login failed
@@ -77,6 +84,7 @@ class App extends Component {
                 </Center>
             );
         }
+        // Instruct the user to update their config.json if the client id or tenant haven't been entered
         if (!configured) {
             return (
                 <Center>
@@ -86,6 +94,7 @@ class App extends Component {
                 </Center>
             );
         }
+        // Temporarily display Loading... text while redirecting to login to Splunk Cloud Services
         if (!loggedIn) {
             return (
                 <Center>
@@ -94,6 +103,7 @@ class App extends Component {
                 </Center>
             );
         }
+        // If the app is configured and the user is logged in, display the Dashboard component
         return (
             <React.Fragment>
                 <GlobalStyle />

@@ -18,6 +18,10 @@ import AuthClient from '@splunkdev/cloud-auth/AuthClient';
 
 import { auth as authConfig } from './config/config.json';
 
+/**
+  * This client handles user login for Splunk Cloud Services and redirecting back
+  * to the app.
+  */
 export default new AuthClient({
     ...authConfig,
     redirectUri: window.location.origin, // eslint-disable-line

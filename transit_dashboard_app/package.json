@@ -15,7 +15,7 @@
     "@splunk/dashboard-core": "^8.0.4",
     "@splunk/dashboard-presets": "^8.0.4",
     "@splunk/react-ui": "^2.13.1",
-    "@splunkdev/cloud-auth": "^1.0.0",
+    "@splunkdev/cloud-auth-client": "^1.0.0",
     "babel-polyfill": "^6.26.0",
     "core-js": "^2.6.9",
     "react": "^16.9.0",

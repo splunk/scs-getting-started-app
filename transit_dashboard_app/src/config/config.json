@@ -1,6 +1,8 @@
 {
     "auth": {
-        "clientId": "YOUR CLIENT ID"
+        "clientId": "YOUR CLIENT ID",
+        "grantType": "implicit OR pkce",
+        "redirectUri": "http://REDIRECT_URI.com"
     },
     "tenantId": "YOUR TENANT ID",
     "cloudApiUrl": "https://api.scp.splunk.com"

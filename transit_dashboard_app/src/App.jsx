@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 /**
  * Copyright 2019 Splunk, Inc.
  *
@@ -44,7 +45,7 @@ class App extends Component {
     authenticate = async () => {
         try {
             // authClient will redirect to login page if user is not authenticated.
-            const authenticated = await authClient.checkAuthentication();
+            const authenticated = await authClient.getAccessToken() !== '';
             this.setState({
                 loggedIn: authenticated,
             });
@@ -62,8 +63,6 @@ class App extends Component {
         // display the error itself otherwise
         if (error) {
             if (!loggedIn) {
-                // Clear any tokens from storage as login failed
-                authClient.tokenManager.clear();
                 return (
                     <React.Fragment>
                         <GlobalStyle />
@@ -90,7 +89,7 @@ class App extends Component {
                 <Center>
                     <GlobalStyle />
                     <ErrorMsg><ErrorCircle>!</ErrorCircle>
-                    Configure your clientId and tenantId in src/config/config.json to continue</ErrorMsg>
+                        Configure your clientId and tenantId in src/config/config.json to continue</ErrorMsg>
                 </Center>
             );
         }

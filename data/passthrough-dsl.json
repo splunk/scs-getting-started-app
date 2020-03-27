@@ -1,0 +1,3 @@
+{
+  "dsl": "events = receive_from_ingest_rest_api(\"rest_api:all\"); write-index(events, \"\", \"main\");"
+}

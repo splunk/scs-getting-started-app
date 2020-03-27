@@ -50,7 +50,7 @@ The most fundamental concepts to understand for this sample app are the identiti
 2. At the command line, navigate to the folder and run the following command: 
 
     ``` 
-    $ git clone https://github.com/splunk/scs-getting-started-app
+    git clone https://github.com/splunk/scs-getting-started-app
     ```
 
 ## Log in to Splunk Cloud Services and use the APIs
@@ -89,13 +89,23 @@ For a more programmatic approach, use `scloud` at the command line to explore th
 To log in at the command line, enter:
 
 ```
-$ scloud -u <YOUR-PRINCIPAL-NAME> login
+scloud login
 ```
 
-To get details about your user account (your principal), enter:
+Enter your username and password when prompted. 
+
+All commands require a tenant and username, so for convenience save your tenant and username in **scloud** settings. Enter the following commands, replacing `<TENANT>` and `<USERNAME>` with your values:
 
 ```
-$ scloud identity get-principal <YOUR-PRINCIPAL-NAME>
+scloud config set --key tenant --value <TENANT>
+
+scloud config set --key username --value <USERNAME>
+```
+
+To view your saved settings, enter: 
+
+```
+scloud config list
 ```
 
 ## Set up a tenant with a data pipeline
@@ -110,28 +120,30 @@ After events are indexed, they can be searched through an updated and refined Sp
 
 Before data can be ingested, your tenant must have a pipeline defined and activated to process the events. For this app, create a simple passthrough pipeline that reads events from the Splunk Firehose and writes them to the "main" index. 
 
-To access pipeline dsl and sample data files, enter the `data` directory:
+To access pipeline DSL and sample data files, navigate to the `data` directory:
 
 ```
-$ cd data
+cd data
 ```
 
-To create a passthrough pipeline, enter the following `scloud` commands:
+To create a passthrough pipeline, enter:
 
 ```
-$ scloud set tenant <YOUR-TENANT-NAME>
-
-$ scloud streams compile-dsl -dsl-file passthrough.dsl > passthrough.upl
-
-$ scloud streams create-pipeline -name passthrough -bypass-validation true -data-file passthrough.upl
+scloud streams compile-dsl --input-datafile passthrough-dsl.json
 ```
 
-Make note of the `id` (the one that is returned underneath the `description` field). You'll need it for the next command.
-
-To activate the pipeline: 
+Save the output from this command to a text file named **compiled-dsl.json** in the current directory, then enter:
 
 ```
-$ scloud streams activate-pipelines <PIPELINE-ID>
+scloud streams create-pipeline --name passthrough --description "A passthrough pipeline" --input-datafile compiled-dsl.json --bypass-validation true
+```
+
+Make note of the `id` that is returned, which is the pipeline ID. You'll need it for the next command.
+
+Activate the pipeline, replacing <PIPELINE-ID> with your value: 
+
+```
+scloud streams activate-pipeline --id <PIPELINE-ID>
 ```
 
 ## Get sample data in and out of your tenant
@@ -140,55 +152,33 @@ Once you have an activated pipeline, you can start sending events to your tenant
 
 This repo includes two JSON files with sample data from Seattle transit agencies containing service and arrival/departure data for routes provide during a set period of time. 
 
-Run the following `scloud` commands to ingest the sample data files.
-
-On *nix:
+Run the following `scloud` commands to ingest the sample data files:
 
 ```
-$ cat agencies-with-coverage.json \
-    | scloud ingest post-events \
-        -host localhost \
-        -source agencies_with_coverage_json \
-        -sourcetype json_no_timestamp \
-        -format raw
+scloud ingest post-events --host localhost --source agencies_with_coverage_json --sourcetype json_no_timestamp --format raw < agencies-with-coverage.json
 
-$ cat arrivals-and-departures.json \
-    | scloud ingest post-events \
-        -host localhost \
-        -source arrivals_and_departures_json \
-        -sourcetype json_no_timestamp \
-        -format raw
-```
+scloud ingest post-events --host localhost --source arrivals_and_departures_json --sourcetype json_no_timestamp --format raw < arrivals-and-departures.json
 
-On Windows: 
-
-```
-more arrivals-and-departures.json | scloud ingest post-events -host localhost -source arrivals_and_departures_json -sourcetype json_no_timestamp -format raw
-
-more agencies-with-coverage.json | scloud ingest post-events -host localhost -source agencies_with_coverage_json -sourcetype json_no_timestamp -format raw
 ```
 
 ### Explore the data through search
 
 After ingesting and passing the sample data through the pipeline, the data is indexed and available for search.
 
-Run the following commands to search the sample data files to see how many routes are currently active for each transit agency.
-
-On *nix:
+Run the following command to create a search job that searches the sample data files to see how many routes are currently active for each transit agency.
 
 ```
-$ scloud search "| from index:main where source=\"arrivals_and_departures_json\" \
-    | stats count() as refCount \
-    by 'data.references.agencies{}.name'" \
-      -earliest 0 \
-      -latest now
+scloud search create-job --query "from index:main where source=\"arrivals_and_departures_json\" | stats count() as refCount by 'data.references.agencies{}.name'" --earliest 0 --latest "now"
 ```
 
-On Windows: 
+Make note of the `sid` that is returned, which is the search ID. You'll need it for the next command.
+
+View search results, replacing <SEARCH-ID> with your value:
 
 ```
-scloud search "from index:main where source=\"arrivals_and_departures_json\" | stats count() as refCount by 'data.references.agencies{}.name' " -earliest 0 -latest now
+scloud search list-results --sid <SEARCH-ID>
 ```
+
 
 ### Use Splunk Investigate to get data in
 
@@ -217,11 +207,7 @@ To define the app and create a subscription with your tenant:
     **Note:** App names and titles are unique across all tenants, so for this sample app, replace `<TENANT>` below with your tenant name.
 
     ```
-    $ scloud appreg create-app transit.demo.<TENANT> web \
-        -redirect-urls http://localhost:3000 \
-        -login-url https://auth.scp.splunk.com \
-        -title "Transit Dashboard Demo App for <TENANT>" \
-        -description "Copy of the transit dashboard demo app"
+    scloud appreg create-app --name "transit.demo.<TENANT>" --title "Transit Dashboard Demo App for <TENANT>" --description "Copy of the transit dashboard demo app" --kind web --redirect-urls "http://localhost:3000" --login-url "https://auth.scp.splunk.com"
     ```
 
     Make note of the `<CLIENT_ID>` that is returned. You'll need it when configuring the Transit Dashboard App.
@@ -229,7 +215,7 @@ To define the app and create a subscription with your tenant:
 2. Create a subscription between your tenant and the app
 
     ```
-    $ scloud appreg create-subscription transit.demo.<TENANT>
+    scloud appreg create-subscription --app-name "transit.demo.<TENANT>"
     ```
 
 ## Build and run the Transit Dashboard App
@@ -245,7 +231,7 @@ To build and run the app:
 2. Install the dependencies by running the following command: 
 
     ```
-    $ yarn
+    yarn
     ```
 
 3.  In the **./src/config/config.json** file, update the following values: 
@@ -255,7 +241,7 @@ To build and run the app:
 4.  Start the example app in develop mode: 
     
     ```
-    $ yarn run start
+    yarn run start
     ```
 
 5.  In a browser, open `localhost:3000` to view the app.

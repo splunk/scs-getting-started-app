@@ -207,7 +207,7 @@ To define the app and create a subscription with your tenant:
     **Note:** App names and titles are unique across all tenants, so for this sample app, replace `<TENANT>` below with your tenant name.
 
     ```
-    scloud appreg create-app --name "transit.demo.<TENANT>" --title "Transit Dashboard Demo App for <TENANT>" --description "Copy of the transit dashboard demo app" --kind web --redirect-urls "http://localhost:3000" --login-url "https://auth.scp.splunk.com"
+    scloud appreg create-app-web-app --name "transit.demo.<TENANT>" --title "Transit Dashboard Demo App for <TENANT>" --description "Copy of the transit dashboard demo app" --kind web --redirect-urls "http://localhost:3000" --login-url "https://auth.scp.splunk.com"
     ```
 
     Make note of the `<CLIENT_ID>` that is returned. You'll need it when configuring the Transit Dashboard App.

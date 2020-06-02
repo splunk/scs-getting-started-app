@@ -129,13 +129,13 @@ cd data
 To create a passthrough pipeline, enter:
 
 ```
-scloud streams compile-dsl --input-datafile passthrough-dsl.json
+scloud streams compile --spl "$(< passthrough.spl )" > passthrough.upl.json
 ```
 
-Save the output from this command to a text file named **compiled-dsl.json** in the current directory, then enter:
+Save the output from this command to a text file named **passthrough.upl.json** in the current directory, then enter:
 
 ```
-scloud streams create-pipeline --name passthrough --description "A passthrough pipeline" --input-datafile compiled-dsl.json --bypass-validation true
+scloud streams create-pipeline --name passthrough --description "A passthrough pipeline" --input-datafile passthrough.upl.json
 ```
 
 Make note of the `id` that is returned, which is the pipeline ID. You'll need it for the next command.

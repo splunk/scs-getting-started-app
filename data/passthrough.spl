@@ -1,0 +1,1 @@
+| from receive_from_ingest_rest_api("rest_api:all") | into write_index("", "main");
